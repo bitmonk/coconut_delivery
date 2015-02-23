@@ -35,11 +35,13 @@ for stream in jet_streams:
   start = stream[0]
   end = stream[1]
   energy_required = stream[2]
-  if start > position:
+  if start == position:
     old_position = position
     position = end
     energy_consumed += energy_required
     logger.info("Moved from %s to %s using %s energy" % (old_position, position, energy_required))
+  elif start > position:
+    energy_consumed += (start - position) * const_energy
   else:
     logger.info("Did not move from %s to %s using %s energy" % (position, end, energy_required))
 
